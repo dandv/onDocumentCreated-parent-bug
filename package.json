@@ -1,0 +1,12 @@
+{
+  "name": "ondocumentcreated",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "dependencies": {
+    "firebase-tools": "^13.29.1"
+  }
+}

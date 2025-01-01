@@ -1,0 +1,26 @@
+{
+  "name": "functions",
+  "description": "Cloud Function for Firebase handling onDocumentCreated",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions,firestore",
+    "dev": "firebase emulators:start --only functions,firestore --inspect-functions 10001",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions,firestore",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^13.0.2",
+    "firebase-functions": "^6.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0"
+  },
+  "private": true
+}
