@@ -3,7 +3,7 @@
  * shows that the country document had NOT been created yet when the event
  * was triggered.
  *
- * Check logs at https://console.cloud.google.com/logs/query?project=ondocumentcreated-bug
+ * Check logs at https://console.cloud.google.com/logs
  */
 
 const assert = require("assert");
@@ -25,6 +25,7 @@ exports.firestoreEventHander = onDocumentCreated(
       // Here, /countries/{countryId} should have been automatically created
       const snapshot = event.data; // not user-facing to log
       console.log("snapshot:", snapshot.data());
+      console.log("snapshot exists:", snapshot.exists); // true
 
       const cityId = snapshot.id;
       console.log("cityId:", cityId);
@@ -56,9 +57,14 @@ exports.firestoreEventHander = onDocumentCreated(
           "countryRef has an incorrect path",
       );
 
+      // Access snapshot through the db
+      const cityDoc = await db.doc(`countries/${countryId}/cities/${cityId}`).get();
+      console.log("cityDoc via db:", cityDoc.data());
+      console.log("cityDoc.exists:", cityDoc.exists); // true
+
       // Check if the countryRef document exists
       const countryDoc = await countryRef.get();
-      debugger; // eslint-disable-line no-debugger
+      // debugger;
       console.log("countryDoc:", countryDoc.data());
       console.log("countryDoc.exists:", countryDoc.exists); // ⚠️ false ⚠️
 
@@ -66,5 +72,6 @@ exports.firestoreEventHander = onDocumentCreated(
       const countryDoc2 = await db.doc(`countries/${countryId}`).get();
       console.log("countryDoc2:", countryDoc2.data());
       console.log("countryDoc2.exists:", countryDoc2.exists); // ⚠️ false ⚠️
+      // Might need to refresh https://console.cloud.google.com/logs/ or wait to see all log entries
     },
 );
