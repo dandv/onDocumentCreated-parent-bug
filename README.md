@@ -23,7 +23,7 @@ nested documents not existing yet.
 2. `cd onDocumentCreated-parent-bug`
 3. `npm install`
 4. `cd functions`
-5. `npm deploy`
+5. `npm run deploy`
 6. `node create-doc.js`
 7. Check the logs at https://console.cloud.google.com/logs/query?project=ondocumentcreated-bug
 8. Notice `countryDoc.exists: false`
